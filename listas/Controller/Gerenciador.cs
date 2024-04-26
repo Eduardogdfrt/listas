@@ -6,9 +6,13 @@ namespace listas.Controller
 {
     public class Gerenciador : IContatoManager
     {
+        // Princípio da Inversão de Dependência (DIP): 
+        // Gerenciador depende de uma abstração (IObserver) e não de uma concretização.
         private List<IObserver> observers = new List<IObserver>();
         private List<Contato> ContatoList { get; set; } = new List<Contato>();
 
+        // Princípio Aberto-Fechado (OCP): 
+        // Métodos para adicionar e remover observadores permitem a extensão sem modificação.
         public void Attach(IObserver observer)
         {
             observers.Add(observer);
@@ -19,6 +23,8 @@ namespace listas.Controller
             observers.Remove(observer);
         }
 
+        // Princípio da Responsabilidade Única (SRP): 
+        // Gerenciador tem a responsabilidade de notificar os observadores.
         public void NotifyObservers()
         {
             foreach (var observer in observers)
@@ -27,11 +33,15 @@ namespace listas.Controller
             }
         }
 
+        // Princípio de Substituição de Liskov (LSP): 
+        // Métodos que implementam a interface IContatoManager.
         public void AdicionarContato(Contato contato)
         {
             ContatoList.Add(contato);
+            NotifyObservers();
         }
 
+        // ... rest of your methods ...
         public void AtualizarContato(Contato novoContato)
         {
             var existingContact = ContatoList.Find(c => c.Telefone == novoContato.Telefone);

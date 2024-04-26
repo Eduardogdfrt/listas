@@ -9,6 +9,8 @@ namespace listas.Controller
 {
     public interface IContatoManager
     {
+        // Princípio da Segregação de Interface (ISP): 
+        // Define uma interface pequena e específica que será implementada pelo Gerenciador.
         void AdicionarContato(Contato contato);
         void AtualizarContato(Contato contato);
         void DeletarContato(Contato contato);
